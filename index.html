@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<title>Minimal sql.js-httpvfs demo</title>
+<script src="./dist/bundle.js"></script>
+
+<!-- Input field for token name -->
+<input type="text" id="tokenNameInput" placeholder="Enter token name">
+<button onclick="fetchAndDisplayToken()">Search</button>
+
+<!-- Display area for results -->
+<pre id="tokenOutput"></pre>
+
+<script>
+  async function fetchAndDisplayToken() {
+    const tokenName = document.getElementById("tokenNameInput").value;
+    try {
+      const data = await window.fetchTokenDetails(tokenName);
+      document.getElementById("tokenOutput").textContent = JSON.stringify(data, null, 2);  // Pretty print the JSON
+    } catch (err) {
+      document.getElementById("tokenOutput").textContent = `Error: ${err.message}`;
+    }
+  }
+</script>
